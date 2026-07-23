@@ -42,7 +42,7 @@ Enter the sensor values below and click **Predict**.
 )
 
 st.info(
-    "Demo Version: This application uses 10 selected sensor features from the SECOM Manufacturing Dataset."
+    "Demo Version: This application uses 5 selected sensor features from the SECOM Manufacturing Dataset."
 )
 
 # ==========================================================

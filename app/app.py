@@ -40,12 +40,38 @@ This application predicts whether a manufactured product will:
 - ❌ FAIL Quality Inspection
 
 Enter the sensor values below and click **Predict**.
+
+**📊 Expected Ranges (from training data):**
+- **PASS**: Temperature 2900-3100, Pressure 2400-2600, Humidity 2100-2300, Voltage 1200-1500, Current 1.0-1.6
+- **FAIL**: Temperature 2400-2700, Pressure 1800-2200, Humidity 1600-2000, Voltage 800-1200, Current 0.3-0.8
 """
 )
 
 st.info(
     "Demo Version: This application uses 5 selected sensor features from the SECOM Manufacturing Dataset."
 )
+
+# Add sidebar with ranges
+with st.sidebar:
+    st.subheader("📋 Reference Ranges")
+    
+    st.write("**✅ PASS Ranges:**")
+    st.write("""
+    - Temperature: 2900-3100
+    - Pressure: 2400-2600  
+    - Humidity: 2100-2300
+    - Voltage: 1200-1500
+    - Current: 1.0-1.6
+    """)
+    
+    st.write("**❌ FAIL Ranges:**")
+    st.write("""
+    - Temperature: 2400-2700
+    - Pressure: 1800-2200
+    - Humidity: 1600-2000
+    - Voltage: 800-1200
+    - Current: 0.3-0.8
+    """)
 
 # ==========================================================
 # INPUT SECTION
@@ -72,10 +98,10 @@ if "pass_example" in st.session_state and st.session_state.pass_example:
     f4 = st.session_state.get("f4", 1.0)
     st.session_state.pass_example = False
 elif "fail_example" in st.session_state and st.session_state.fail_example:
-    f0 = 2500.0
+    f0 = 2550.0
     f1 = 2000.0
     f2 = 1800.0
-    f3 = 900.0
+    f3 = 1000.0
     f4 = 0.5
     st.session_state.fail_example = False
 else:

@@ -42,8 +42,10 @@ This application predicts whether a manufactured product will:
 Enter the sensor values below and click **Predict**.
 
 **📊 Expected Ranges (from training data):**
-- **PASS**: Temperature 2900-3100, Pressure 2400-2600, Humidity 2100-2300, Voltage 1200-1500, Current 1.0-1.6
-- **FAIL**: Temperature 2400-2700, Pressure 1800-2200, Humidity 1600-2000, Voltage 800-1200, Current 0.3-0.8
+- **FAIL**: Temperature 2848-3267, Pressure 2286-2714, Humidity 2139-2315, Voltage 900-2360, Current 0.68-2.42
+- **PASS**: Temperature 2743-3356, Pressure 2159-2846, Humidity 2061-2315, Voltage 0-3715, Current 0.68-114.5
+
+*Note: The ranges overlap significantly. The key differentiator is Current - FAIL tends to have lower current values.*
 """
 )
 
@@ -57,21 +59,24 @@ with st.sidebar:
     
     st.write("**✅ PASS Ranges:**")
     st.write("""
-    - Temperature: 2900-3100
-    - Pressure: 2400-2600  
-    - Humidity: 2100-2300
-    - Voltage: 1200-1500
-    - Current: 1.0-1.6
+    - Temperature: 2743-3356
+    - Pressure: 2159-2846  
+    - Humidity: 2061-2315
+    - Voltage: 0-3715
+    - Current: 0.68-114.54
     """)
     
     st.write("**❌ FAIL Ranges:**")
     st.write("""
-    - Temperature: 2400-2700
-    - Pressure: 1800-2200
-    - Humidity: 1600-2000
-    - Voltage: 800-1200
-    - Current: 0.3-0.8
+    - Temperature: 2848-3267
+    - Pressure: 2286-2714
+    - Humidity: 2139-2315
+    - Voltage: 900-2360
+    - Current: 0.68-2.42
     """)
+    
+    st.write("**💡 Key Insight:**")
+    st.write("Current is the main differentiator. FAIL has lower current (0.68-2.42) vs PASS (0.68-114.54)")
 
 # ==========================================================
 # INPUT SECTION
@@ -91,18 +96,18 @@ with col_example2:
 
 # Set example values
 if "pass_example" in st.session_state and st.session_state.pass_example:
-    f0 = st.session_state.get("f0", 3000.0)
-    f1 = st.session_state.get("f1", 2500.0)
-    f2 = st.session_state.get("f2", 2200.0)
-    f3 = st.session_state.get("f3", 1400.0)
-    f4 = st.session_state.get("f4", 1.0)
+    f0 = st.session_state.get("f0", 3015.0)
+    f1 = st.session_state.get("f1", 2496.0)
+    f2 = st.session_state.get("f2", 2201.0)
+    f3 = st.session_state.get("f3", 1398.0)
+    f4 = st.session_state.get("f4", 4.38)
     st.session_state.pass_example = False
 elif "fail_example" in st.session_state and st.session_state.fail_example:
-    f0 = 2550.0
-    f1 = 2000.0
-    f2 = 1800.0
-    f3 = 1000.0
-    f4 = 0.5
+    f0 = 3008.0
+    f1 = 2495.0
+    f2 = 2200.0
+    f3 = 1356.0
+    f4 = 1.3
     st.session_state.fail_example = False
 else:
     f0 = 0.0

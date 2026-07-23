@@ -2,6 +2,7 @@ import os
 import joblib
 import pandas as pd
 import streamlit as st
+from sklearn.preprocessing import StandardScaler
 
 # ==========================================================
 # PAGE CONFIGURATION
@@ -72,10 +73,14 @@ if st.button("Predict"):
         "2": [f2],
         "3": [f3],
         "4": [f4],
-     
     })
 
-    prediction = model.predict(input_data)[0]
+    # Scale the input data
+    scaler = StandardScaler()
+    input_scaled = scaler.fit_transform(input_data)
+    input_scaled_df = pd.DataFrame(input_scaled, columns=input_data.columns)
+
+    prediction = model.predict(input_scaled_df)[0]
 
     st.divider()
 
@@ -90,3 +95,6 @@ if st.button("Predict"):
 
     st.subheader("Input Summary")
     st.dataframe(input_data)
+    
+    st.subheader("Scaled Input (Used for Prediction)")
+    st.dataframe(input_scaled_df)

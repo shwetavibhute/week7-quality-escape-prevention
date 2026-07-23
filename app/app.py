@@ -2,7 +2,6 @@ import os
 import joblib
 import pandas as pd
 import streamlit as st
-from sklearn.preprocessing import StandardScaler
 
 # ==========================================================
 # PAGE CONFIGURATION
@@ -20,8 +19,10 @@ st.set_page_config(
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "notebooks", "models", "best_model.pkl")
+SCALER_PATH = os.path.join(BASE_DIR, "notebooks", "models", "scaler.pkl")
 
 model = joblib.load(MODEL_PATH)
+scaler = joblib.load(SCALER_PATH)
 
 # ==========================================================
 # TITLE
@@ -108,9 +109,8 @@ if st.button("Predict"):
         "4": [f4],
     })
 
-    # Scale the input data
-    scaler = StandardScaler()
-    input_scaled = scaler.fit_transform(input_data)
+    # Scale the input data using the saved scaler
+    input_scaled = scaler.transform(input_data)
     input_scaled_df = pd.DataFrame(input_scaled, columns=input_data.columns)
 
     prediction = model.predict(input_scaled_df)[0]

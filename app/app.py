@@ -51,14 +51,47 @@ st.info(
 # ==========================================================
 st.subheader("Enter Manufacturing Sensor Values")
 
+# Example buttons
+col_example1, col_example2 = st.columns(2)
+
+with col_example1:
+    if st.button("📊 Example: PASS"):
+        st.session_state.pass_example = True
+        
+with col_example2:
+    if st.button("⚠️ Example: FAIL"):
+        st.session_state.fail_example = True
+
+# Set example values
+if "pass_example" in st.session_state and st.session_state.pass_example:
+    f0 = st.session_state.get("f0", 3000.0)
+    f1 = st.session_state.get("f1", 2500.0)
+    f2 = st.session_state.get("f2", 2200.0)
+    f3 = st.session_state.get("f3", 1400.0)
+    f4 = st.session_state.get("f4", 1.0)
+    st.session_state.pass_example = False
+elif "fail_example" in st.session_state and st.session_state.fail_example:
+    f0 = 2500.0
+    f1 = 2000.0
+    f2 = 1800.0
+    f3 = 900.0
+    f4 = 0.5
+    st.session_state.fail_example = False
+else:
+    f0 = 0.0
+    f1 = 0.0
+    f2 = 0.0
+    f3 = 0.0
+    f4 = 0.0
+
 col1, col2 = st.columns(2)
 
 with col1:
-    f0 = st.number_input("🌡️ Temperature", value=0.0)
-    f1 = st.number_input("⚙️ Pressure", value=0.0)
-    f2 = st.number_input("💨 Humidity", value=0.0)
-    f3 = st.number_input("⚡ Voltage", value=0.0)
-    f4 = st.number_input("🔌 Current", value=0.0)
+    f0 = st.number_input("🌡️ Temperature", value=f0)
+    f1 = st.number_input("⚙️ Pressure", value=f1)
+    f2 = st.number_input("💨 Humidity", value=f2)
+    f3 = st.number_input("⚡ Voltage", value=f3)
+    f4 = st.number_input("🔌 Current", value=f4)
 
 
 # ==========================================================

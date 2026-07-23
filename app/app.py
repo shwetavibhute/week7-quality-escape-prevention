@@ -72,11 +72,7 @@ if st.button("Predict"):
         "2": [f2],
         "3": [f3],
         "4": [f4],
-        "5": [f5],
-        "6": [f6],
-        "7": [f7],
-        "8": [f8],
-        "9": [f9]
+     
     })
 
     prediction = model.predict(input_data)[0]
